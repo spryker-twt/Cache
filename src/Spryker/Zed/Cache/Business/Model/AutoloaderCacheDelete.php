@@ -40,7 +40,9 @@ class AutoloaderCacheDelete
             $dirs[] = str_replace('{STORE}', $store, $rootDirectory);
         }
         $filesystem = new Filesystem();
-        $filesystem->remove($dirs);
+        if ($filesystem->exists($dirs)) {
+            $filesystem->remove($dirs);
+        }
 
         return $dirs;
     }
